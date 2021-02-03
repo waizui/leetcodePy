@@ -63,7 +63,7 @@ def GetTimes(code):
             if current=='0':
                 times[i]=times[i-1]
             else:
-                times[i]=times[i-1]+ (times[i-2] if i>1 else 1)
+                times[i]=times[i-1]+ (times[i-2] if i>1 else 1) #从第二个开始，当前索引的字符所对应的解码方式，为前一个和前前一个字符的解码数量相加（）
         elif prev=='2':
             if current=='0' or int(current) >=7:
                 times[i]=times[i-1]
