@@ -18,9 +18,11 @@ import math
 1 <= K <= 10 ^ 9
 """
 
+# O(n^2)时间复杂度 太慢了
 def findSubsetLen(arr:list,K:int):
     left= 0
     right=len(arr)
+    hasUpdated=False
 
     if len(arr)==0:
         return -1
@@ -32,26 +34,20 @@ def findSubsetLen(arr:list,K:int):
             continue
 
         for j in range(i,len(arr)):
-            if not arr[j]:
+            if not arr[j] and arr[j]!=0:
                 break
             sum+=arr[j]
-            if sum>K:
+            if sum>=K:
                 if j-i<right-left:
                     left=i
                     right=j+1
+                    hasUpdated=True
                 break
         sum=0
 
-    return right-left
+    return (right-left) if hasUpdated else -1 
 
 
-num=[2,3,4,5,None,1,3,7]
-
-re=findSubsetLen(num,9)
-
-print(re)
-
-"""
 instr=input("请输入数字 用空格隔开 回车确定\n")
 
 nums=[int(i) for i in instr.split(' ')]
@@ -61,5 +57,3 @@ k=input("请输入K")
 re=findSubsetLen(nums,k)
 
 print("最短的非空连续子数组的长度为"+str(re))
-
-"""
