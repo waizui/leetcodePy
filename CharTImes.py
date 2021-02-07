@@ -37,11 +37,11 @@ s 只包含数字，并且可能包含前导零。
 
 """
 
-
+#垃圾代码 但是过了测试
 def GetTimes(code):
     if code[0]=='0':
-        print("无效编码，不能从0开始")
         return 0
+    N=len(code)
 
     times=[0 for i in range(len(code))]
     times[0]=1
@@ -53,23 +53,29 @@ def GetTimes(code):
         if prev=='1':
             if current=='0':
                 times[i]=times[i-1]
+            elif i<N-1:
+                if code[i+1] =='0':
+                    times[i]=times[i-1]
+                else:
+                    times[i]=times[i-1]+(times[i-2] if i>1 else 1)
             else:
                 times[i]=times[i-1]+ (times[i-2] if i>1 else 1) #从第二个开始，当前索引的字符所对应的解码方式，为前一个和前前一个字符的解码数量相加（）
         elif prev=='2':
             if current=='0' or int(current) >=7:
                 times[i]=times[i-1]
+            elif i<N-1:
+                if code[i+1] =='0':
+                    times[i]=times[i-1]
+                else:
+                    times[i]=times[i-1]+(times[i-2] if i>1 else 1)
             else:
                 times[i]=times[i-1]+(times[i-2] if i>1 else 1)
         else:
             if current=='0':
-                print("无效编码，不能从0开始")
                 return 0
             times[i]=times[i-1]
     
     return times[len(code)-1]
 
-
-str=input("输入code值\n")
-
-print( "可能的编码组合数为\n")
-print(GetTimes(str))
+re= GetTimes("226")
+print(re)
