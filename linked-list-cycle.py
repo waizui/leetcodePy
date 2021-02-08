@@ -22,4 +22,5 @@
 pos 为 -1 或者链表中的一个 有效索引 。
 """
 
+
 def hasCycle(head: ListNode) -> bool:
